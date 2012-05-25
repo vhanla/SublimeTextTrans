@@ -1,0 +1,25 @@
+SublimeText2 Transparent
+===================
+
+Overview
+--------
+This simple plugin for Sublime Text 2 provides contextual menues to modify the application opacity.
+This is only for Windows Operating System.
+
+Install
+-------
+You may install `SublimeTextTrans` via git with the below commands:
+
+*Windows*
+
+    `git clone git://github.com/vhanla/SublimeTextTrans.git "%APPDATA%\Sublime Text 2\Packages\SublimeTextTrans"`
+
+Usage:
+-------
+You can either use the Preferences>Opacity submenu to set the opacity or
+you can use the hotkeys Ctrl+Shift+[1,2,3,4,5,6]
+
+Author & Contributors
+----------------------
+[Victor Alberto Gil](http://profiles.google.com/vhanla) - Hope you like my work.
+

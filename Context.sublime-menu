@@ -1,0 +1,29 @@
+[{
+  "id": "sublimetransmenu",
+  "caption": "Opacity",
+  "children": [{
+      "id": "sublimetranssubmenu1",
+      "caption": "About",
+      "command": "sub_trans_about"
+    },
+    {
+      "id": "sublimetranssubmenu12",
+      "caption": "-"      
+    },
+    {
+    "id": "sublimetranssubmenu2",
+    "caption": "Enable",
+    "children": [
+      { "id": "sublimetranssubmenunine", "caption": "95%", "command": "set_opacity_nine" },
+      { "id": "sublimetranssubmenueight", "caption": "92%", "command": "set_opacity_eight" },
+      { "id": "sublimetranssubmenuseven", "caption": "89%", "command": "set_opacity_seven" },
+      { "id": "sublimetranssubmenusix", "caption": "86%", "command": "set_opacity_six" },
+      { "id": "sublimetranssubmenuhalf", "caption": "83%", "command": "set_opacity_half" }
+    ]
+    },
+    {
+      "id": "sublimetranssubmenu3",
+      "caption": "Disable",
+      "command": "set_opacity"
+    }] 
+}]
