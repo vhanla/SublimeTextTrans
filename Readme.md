@@ -14,6 +14,10 @@ You may install `SublimeTextTrans` via git with the below commands:
 
     `git clone git://github.com/vhanla/SublimeTextTrans.git "%APPDATA%\Sublime Text 2\Packages\SublimeTextTrans"`
 
+Or download directly from here
+http://dl.dropbox.com/u/9084974/SublimeText2Plugins/SublimeTextTrans.sublime-package
+(it is a zip file renamed)
+
 Usage:
 -------
 You can either use the Preferences>Opacity submenu to set the opacity or
