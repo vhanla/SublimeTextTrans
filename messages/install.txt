@@ -17,7 +17,7 @@ You may install `SublimeTextTrans` via git with the below commands:
 Usage:
 -------
 You can either use the Preferences>Opacity submenu to set the opacity or
-you can use the hotkeys Ctrl+Alt+Shift+[1,2,3,4,5,0]
+you can use the hotkeys Ctrl+Shift+[1,2,3,4,5,6]
 
 Author & Contributors
 ----------------------
