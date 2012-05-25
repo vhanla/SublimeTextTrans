@@ -23,6 +23,8 @@ Usage:
 You can either use the Preferences>Opacity submenu to set the opacity or
 you can use the hotkeys Ctrl+Shift+[1,2,3,4,5,6]
 
+![Snapshot](http://dl.dropbox.com/u/9084974/SublimeText2Plugins/SublimeTextTrans.jpg "Snapshot")
+
 Author & Contributors
 ----------------------
 [Victor Alberto Gil](http://profiles.google.com/vhanla) - Hope you like my work.
