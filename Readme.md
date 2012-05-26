@@ -6,6 +6,8 @@ Overview
 This simple plugin for Sublime Text 2 provides contextual menues to modify the application opacity.
 This is only for Windows Operating System.
 
+Tested only on Windows 7 64bits with SublimeText 2 64bits Buld 2181
+
 Install
 -------
 You may install `SublimeTextTrans` via git with the below commands:
