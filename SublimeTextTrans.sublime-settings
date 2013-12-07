@@ -1,0 +1,19 @@
+{	
+
+	// Level of opacity varies from 0 to 255 
+
+	// Auto apply on file open 
+	"autoapply": true,
+	
+	// Default opacity level for auto apply
+	"opacity": 228,
+	
+	// It will set the default levels of opacity
+	
+	"level0": 255,
+	"level1": 212,
+	"level2": 220,
+	"level3": 228,
+	"level4": 236,
+	"level5": 243
+}
