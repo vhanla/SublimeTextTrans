@@ -20,7 +20,7 @@ For Sublime Installed:
 
 For Sublime Portable:
 
-    git clone https://github.com/vhanla/SublimeTextTrans.git "C:\SUBLIME2\Data\Packages"
+    git clone https://github.com/vhanla/SublimeTextTrans.git "C:\SUBLIME2\Data\Packages\SublimeTextTrans""
 
 *Where* ***C:\Sublime*** *is the portable's path. So change accordingly.*
 
@@ -57,24 +57,24 @@ To set custom transparency levels visit `Preferences > Package Settings > Sublim
 
 There you can modify the transparency levels, by adding the following and adjusting the levels as you wish:
 
-```json
-{
 
-	// If you like to have a different transparency level
-	// modify this array of options in your user preferences 
-	// i.e. just add (copy/paste) this array and modify at wish
-	// IMPORTANT: Level of opacity varies from 0 to 255
-	// 0 = Totally transparent, 255 = Fully opaque
-	"levels": [
-		255, // Full opaque i.e not transparency - a.k.a Disabled
-		212, // Level 5
-		220, // Level 4
-		228, // Level 3
-		236, // Level 2
-		243  // Level 1
-	]
-}
-```
+    {
+
+    	// If you like to have a different transparency level
+    	// modify this array of options in your user preferences 
+    	// i.e. just add (copy/paste) this array and modify at wish
+    	// IMPORTANT: Level of opacity varies from 0 to 255
+    	// 0 = Totally transparent, 255 = Fully opaque
+    	"levels": [
+    		255, // Full opaque i.e not transparency - a.k.a Disabled
+    		212, // Level 5
+    		220, // Level 4
+    		228, // Level 3
+    		236, // Level 2
+    		243  // Level 1
+    	]
+    }
+
 
 Author & Contributors
 ----------------------
