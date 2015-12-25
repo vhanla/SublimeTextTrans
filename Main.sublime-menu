@@ -1,42 +1,84 @@
-[    
+[
     {
-        "caption": "Preferences",
-        "mnemonic": "n",
+        "id": "view",
+        "children":
+        [
+          {
+            "caption": "Window's Transparency",
+            "id": "sublimetransview1",
+            "children":
+            [{
+                  "id": "sublimetranssubmenu1",
+                  "caption": "About",
+                  "command": "sub_trans_about"
+                },
+                { "caption": "-" },
+                { "id": "sublimetranssubmenunine", "caption": "Level 5", "command": "set_opacity_half", "checkbox": true },
+                { "id": "sublimetranssubmenueight", "caption": "Level 4", "command": "set_opacity_six", "checkbox": true },
+                { "id": "sublimetranssubmenuseven", "caption": "Level 3", "command": "set_opacity_seven", "checkbox": true },
+                { "id": "sublimetranssubmenusix", "caption": "Level 2", "command": "set_opacity_eight", "checkbox": true },
+                { "id": "sublimetranssubmenuhalf", "caption": "Level 1", "command": "set_opacity_nine", "checkbox": true },
+                { "caption": "-" },
+                {
+                  "id": "sublimetranssubmenu3",
+                  "caption": "Disable",
+                  "command": "set_opacity",
+                  "checkbox": true
+                }]
+          }
+        ]
+    },
+    {
         "id": "preferences",
         "children":
-        [      
-            { "caption": "-" },         
+        [
             {
-                "caption": "Opacity",
-                "children":
-                [{
-                      "id": "sublimetranssubmenu1",
-                      "caption": "About",
-                      "command": "sub_trans_about"
-                    },
-                    {
-                      "id": "sublimetranssubmenu12",
-                      "caption": "-"      
-                    },
-                    {
-                    "id": "sublimetranssubmenu2",
-                    "caption": "Enable",
-                    "children": [
-                      { "id": "sublimetranssubmenunine", "caption": "95%", "command": "set_opacity_nine" },
-                      { "id": "sublimetranssubmenueight", "caption": "92%", "command": "set_opacity_eight" },
-                      { "id": "sublimetranssubmenuseven", "caption": "89%", "command": "set_opacity_seven" },
-                      { "id": "sublimetranssubmenusix", "caption": "86%", "command": "set_opacity_six" },
-                      { "id": "sublimetranssubmenuhalf", "caption": "83%", "command": "set_opacity_half" }
+              "caption": "Package Settings",
+              "mnemonic": "P",
+              "id": "package-settings",
+              "children":
+                [
+                  {
+                    "caption": "SublimeTextTrans",
+                    "children":
+                    [
+                      {
+                        "id": "sublimetranssubmenu1",
+                        "caption": "About",
+                        "checkbox": true,
+                        "command": "sub_trans_about"
+                      },
+                      {
+                        "command": "open_file",
+                        "args": {
+                          "file": "${packages}/SublimeTextTrans/README.md",
+                          "platform": "Windows"
+                        },
+                        "caption": "Help"
+                      },
+                      { "caption": "-"},
+                      {
+                        "command": "open_file",
+                        "args": {
+                          "file": "${packages}/SublimeTextTrans/SublimeTextTrans.sublime-settings",
+                          "platform": "Windows"
+                        },
+                        "caption": "Settings - Default"
+                      },
+                      {
+                        "command": "open_file",
+                        "args": {
+                          "file": "${packages}/User/SublimeTextTrans.sublime-settings",
+                          "platform": "Windows"
+                        },
+                        "caption": "Settings - User"
+                      }
                     ]
-                    },
-                    {
-                      "id": "sublimetranssubmenu3",
-                      "caption": "Disable",
-                      "command": "set_opacity"
-                    }] 
+                  }
+                ]
             }
-    
-    
+
+
         ]
     }
 ]

@@ -1,29 +1,23 @@
 [{
   "id": "sublimetransmenu",
-  "caption": "Opacity",
+  "caption": "Window's Transparency",
   "children": [{
       "id": "sublimetranssubmenu1",
       "caption": "About",
+      "checkbox": true,
       "command": "sub_trans_about"
     },
-    {
-      "id": "sublimetranssubmenu12",
-      "caption": "-"      
-    },
-    {
-    "id": "sublimetranssubmenu2",
-    "caption": "Enable",
-    "children": [
-      { "id": "sublimetranssubmenunine", "caption": "95%", "command": "set_opacity_nine" },
-      { "id": "sublimetranssubmenueight", "caption": "92%", "command": "set_opacity_eight" },
-      { "id": "sublimetranssubmenuseven", "caption": "89%", "command": "set_opacity_seven" },
-      { "id": "sublimetranssubmenusix", "caption": "86%", "command": "set_opacity_six" },
-      { "id": "sublimetranssubmenuhalf", "caption": "83%", "command": "set_opacity_half" }
-    ]
-    },
+    { "caption": "-" },
+    { "id": "sublimetranssubmenunine", "caption": "Level 5", "command": "set_opacity_half", "checkbox": true },
+    { "id": "sublimetranssubmenueight", "caption": "Level 4", "command": "set_opacity_six", "checkbox": true },
+    { "id": "sublimetranssubmenuseven", "caption": "Level 3", "command": "set_opacity_seven", "checkbox": true },
+    { "id": "sublimetranssubmenusix", "caption": "Level 2", "command": "set_opacity_eight", "checkbox": true },
+    { "id": "sublimetranssubmenuhalf", "caption": "Level 1", "command": "set_opacity_nine", "checkbox": true },
+    { "caption": "-" },
     {
       "id": "sublimetranssubmenu3",
       "caption": "Disable",
-      "command": "set_opacity"
-    }] 
+      "command": "set_opacity",
+      "checkbox": true
+    }]
 }]

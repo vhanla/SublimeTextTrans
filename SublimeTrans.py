@@ -1,16 +1,19 @@
+'''
 ###############################################################
-# Sublime Text 2 and Sublime Text 3 Plugin to adjust opacity under Windows OS #
-# written by vhanla (http://profiles.google.com/vhanla)       #
+# Plugin to adjust window's transparency under Windows OS     #
+# compatible with Sublime Text 2 and Sublime Text 3           #
+# written by vhanla (https://profiles.google.com/vhanla)      #
 ###############################################################
+'''
 
 import os, sublime, sublime_plugin, platform, subprocess, sys
 
 from ctypes import *
 from ctypes import wintypes
 from ctypes import windll
-		
-if sublime.platform()=='windows':	
-	
+
+if sublime.platform()=='windows':
+
 	SetLayeredWindowAttributes = windll.user32.SetLayeredWindowAttributes
 	SetLayeredWindowAttributes.restype = wintypes.BOOL
 	SetLayeredWindowAttributes.argtypes = [
@@ -26,7 +29,7 @@ if sublime.platform()=='windows':
 		wintypes.HWND,
 		wintypes.DWORD
 	]
-	
+
 	GetDesktopWindow = windll.user32.GetDesktopWindow
 	GetDesktopWindow.restype = wintypes.HWND
 	GetDesktopWindow.argtypes = None
@@ -38,20 +41,20 @@ if sublime.platform()=='windows':
 		wintypes.UINT
 	]
 
-	GetClassName = windll.user32.GetClassNameA 
+	GetClassName = windll.user32.GetClassNameA
 	GetClassName.restype = wintypes.INT
 	GetClassName.argtypes = [
 		wintypes.HWND,
-		wintypes.LPSTR, 
+		wintypes.LPSTR,
 		wintypes.INT
 	]
-		
+
 	IsWindowVisible = windll.user32.IsWindowVisible
 	IsWindowVisible.restype = wintypes.BOOL
 	IsWindowVisible.argtypes = [
 		wintypes.HWND
 	]
-	
+
 	ShellExecute = windll.shell32.ShellExecuteW
 	ShellExecute.restype = wintypes.HINSTANCE
 	ShellExecute.argtypes = [
@@ -72,7 +75,16 @@ if sublime.platform()=='windows':
 	SW_HIDE = 0
 	SW_SHOW = 5
 
-	#default global variables , needed to use plugin_loaded function in order to work on ST3
+	STT_VERSION = "1.2"
+	#default global variables , needed to use plugin_loaded function in order to work on ST3	
+	stt_settings_filename = "SublimeTextTrans.sublime-settings"
+	stt_settings = None
+	stt_about_message = ("SublimeTextTrans plugin v%s\n"
+						 "for Sublime Text 2 & Sublime Text 3\n"
+						 "Windows only version\n\n"
+						 "Description: It will make Sublime transparent.\n\n"
+						 "Written by Victor Alberto Gil <vhanla>\n"
+						 "https://github.com/vhanla/SublimeTextTrans") % (STT_VERSION)
 	stt_opacity = 0
 	stt_autoapply = False
 	stt_level0 = 0
@@ -82,108 +94,177 @@ if sublime.platform()=='windows':
 	stt_level4 = 0
 	stt_level5 = 0
 	exe_file = ""	
-		
+	sublime_3 = True
+
 	def sublime_opacity(opacity):
-		#LHDesktop = GetDesktopWindow(None)		
-		LHDesktop = GetDesktopWindow()	
-		LHWindow = GetWindow(LHDesktop,GW_CHILD)				
-		Clase = 'PX_WINDOW_CLASS'		
-		while(LHWindow != None):			
-			LHParent = GetWindowLong(LHWindow, GWL_HWNDPARENT)			
-			clas = create_string_buffer(255)			
-			GetClassName(LHWindow,clas,255)			
-			classs = clas.value			
+		if stt_settings is None:
+			return		
+		#LHDesktop = GetDesktopWindow(None)
+		LHDesktop = GetDesktopWindow()
+		LHWindow = GetWindow(LHDesktop,GW_CHILD)
+		Clase = 'PX_WINDOW_CLASS'
+		while(LHWindow != None):
+			LHParent = GetWindowLong(LHWindow, GWL_HWNDPARENT)
+			clas = create_string_buffer(255)
+			GetClassName(LHWindow,clas,255)
+			classs = clas.value
 			if IsWindowVisible(LHWindow):
-				if (LHParent==0) or (LHParent==LHDesktop):					
-					if(classs==b'PX_WINDOW_CLASS'):						
-						print('Applying opacity level ',opacity)
-						wl = GetWindowLong(LHWindow,GWL_EXSTYLE)	
-						try:							
-							parametro = str(LHWindow)+' '+ str(wl)							
+				if (LHParent==0) or (LHParent==LHDesktop):
+					if(classs==b'PX_WINDOW_CLASS'):
+						#print('Applying opacity level ',opacity)
+						wl = GetWindowLong(LHWindow,GWL_EXSTYLE)
+						try:
+							parametro = str(LHWindow)+' '+ str(wl)
 							ShellExecute(LHDesktop,"open", exe_file,parametro,None,SW_HIDE)
-							if opacity is not None:
-								SetLayeredWindowAttributes(LHWindow,0,opacity, LWA_ALPHA)
+							if opacity is not None:								
+								SetLayeredWindowAttributes(LHWindow,0,opacity, LWA_ALPHA)								
+								stt_settings.set("opacity", opacity)
+								persist_settings()								
 							break
 						except ValueError:
-							print("Error! ")						
+							print("Error! ")
 
 			LHWindow = GetWindow(LHWindow, GW_HWNDNEXT)
-	
+
+	def sublime_opaque(level):
+		global stt_opacity
+		if not stt_opacity == level:			
+			stt_opacity = level
+			sublime_opacity(stt_opacity)
+
+
 	class SetOpacityHalfCommand(sublime_plugin.WindowCommand):
-		def run(self):
-			sublime_opacity(stt_level1)
+		def run(self):			
+			reload_settings() #update with user settings, incase user settings was changed
+			sublime_opaque(stt_level1)			
+		def is_checked(self):
+			return stt_opacity == stt_level1
 
 	class SetOpacitySixCommand(sublime_plugin.WindowCommand):
 		def run(self):
-			sublime_opacity(stt_level2)
+			reload_settings() #update with user settings, incase user settings was changed
+			sublime_opaque(stt_level2)
+		def is_checked(self):
+			return stt_opacity == stt_level2
 
 	class SetOpacitySevenCommand(sublime_plugin.WindowCommand):
 		def run(self):
-			sublime_opacity(stt_level3)
+			reload_settings() #update with user settings, incase user settings was changed
+			sublime_opaque(stt_level3)
+		def is_checked(self):
+			return stt_opacity == stt_level3
 
 	class SetOpacityEightCommand(sublime_plugin.WindowCommand):
 		def run(self):
-			sublime_opacity(stt_level4)
+			reload_settings() #update with user settings, incase user settings was changed
+			sublime_opaque(stt_level4)
+		def is_checked(self):
+			return stt_opacity == stt_level4
 
 	class SetOpacityNineCommand(sublime_plugin.WindowCommand):
 		def run(self):
-			sublime_opacity(stt_level5)
+			reload_settings() #update with user settings, incase user settings was changed
+			sublime_opaque(stt_level5)
+		def is_checked(self):
+			return stt_opacity == stt_level5
 
 	class SetOpacityCommand(sublime_plugin.WindowCommand):
 		def run(self):
-			sublime_opacity(stt_level0)
-			
+			reload_settings() #update with user settings, incase user settings was changed
+			sublime_opaque(stt_level0)
+		def is_checked(self):
+			return stt_opacity == stt_level0
+
 	class SubTransAbout(sublime_plugin.WindowCommand):
 		def run(sef):
-			sublime.message_dialog( "Sublime Text 2 and Sublime Text 3\nTransparency plugin\nfor Windows only\n\nWritten by vhanla\nhttp://codigobit.net")
-			
-	class SetOnOpenFile(sublime_plugin.EventListener):
-		def on_new(self, view):
-			if stt_autoapply:
+			sublime.message_dialog(stt_about_message)
+
+	class SublimeTextTransListener(sublime_plugin.EventListener): 
+		#these for ST3 only	
+		def on_new_async(self, view):			
+			if stt_autoapply:				
 				sublime_opacity(stt_opacity)
-			
-		def on_clone(self, view):  
-			if stt_autoapply:
+				#let's insist twice, specially for new sublime's window instance
+				sublime.set_timeout(sublime_opacity(stt_opacity), 250)
+				sublime.set_timeout(sublime_opacity(stt_opacity), 500) 
+
+		def on_activated_async(self, view):			
+			if stt_autoapply:				
 				sublime_opacity(stt_opacity)
-			
-		def on_load(self, view):  
-			if stt_autoapply:
-				sublime_opacity(stt_opacity) 
+		# there is no async method on ST2
+		def on_new(self, view):			
+			if stt_autoapply and not sublime_3:
+				sublime_opacity(stt_opacity)
 				
-	def plugin_loaded():	
-		print('Loading settings...')
-		#Load settings
-		settings = sublime.load_settings('SublimeTextTrans.sublime-settings')
+		# this event works on ST2. Delayed "hack" in plugin_loaded is only for ST3
+		def on_load(self, view):  
+			if stt_autoapply and not sublime_3:
+				sublime_opacity(stt_opacity) 
+
+		def on_clone(self, view):  
+			if stt_autoapply and not sublime_3:
+				sublime_opacity(stt_opacity)
+
+		def on_activated(self, view):			
+			if stt_autoapply and not sublime_3:
+				sublime_opacity(stt_opacity)
+	
+	def reload_settings():
+		#opacity levels
+		global stt_level0, stt_level1, stt_level2, stt_level3, stt_level4, stt_level5
+		global stt_settings_filename, stt_settings, sublime_3
 		global stt_opacity
 		global stt_autoapply
-		stt_opacity = settings.get('opacity',255)	
-		stt_autoapply = settings.get('autoapply',False)	
-		#opacity levels
-		global stt_level0
-		global stt_level1
-		global stt_level2
-		global stt_level3
-		global stt_level4
-		global stt_level5
+		print ("Notice: Load/Reload settings incase user modified")
+		stt_settings = sublime.load_settings(stt_settings_filename)
+		stt_opacity = int(stt_settings.get('opacity',255))
+		stt_autoapply = bool(stt_settings.get('autoapply',False))
+		stt_levels = stt_settings.get('levels');
+		stt_level0 = int(stt_levels[0])
+		stt_level1 = int(stt_levels[1])
+		stt_level2 = int(stt_levels[2])
+		stt_level3 = int(stt_levels[3])
+		stt_level4 = int(stt_levels[4])
+		stt_level5 = int(stt_levels[5])
+
+	def plugin_loaded():
+		#print('Loading settings...')
+		#Load settings		
+		reload_settings()
 		
-		stt_level0 = settings.get('level0', 255)
-		stt_level1 = settings.get('level1', 212)
-		stt_level2 = settings.get('level2', 220)
-		stt_level3 = settings.get('level3', 228)
-		stt_level4 = settings.get('level4', 236)
-		stt_level5 = settings.get('level5', 243)
-			
-		#Python fails calling SetWindowLong from Windows and crashes the entire Sublimetext, so we will use an exe file to set layered mode the sublimetext running app
+		#Python fails calling SetWindowLong from Windows and crashes the entire Sublimetext,
+		#so we will use an exe file to set layered mode the sublimetext running app
 		lib_folder = os.path.join(os.path.dirname(os.path.abspath(__file__)),'lib')
 		has_lib = os.path.exists(lib_folder)
 		global exe_file
 		exe_file = os.path.join(lib_folder,'SetSublimeLayered.exe')
 		has_exe = os.path.exists(exe_file)
 		if os.name == 'nt' and (not has_lib or not has_exe):
-			sublime.error_message(u'SetSublimeLayered.exe is not found!')
+			sublime.error_message(u'SetSublimeLayered.exe is not found!')		
 		if stt_autoapply:
-			sublime_opacity(stt_opacity)			
-		print('Done!')
-		
-if sys.version_info < (3,):	
-	plugin_loaded()	
+			sublime_opacity(stt_opacity)
+			sublime.set_timeout(focus_active_view, 250)
+
+		#print('Done!')
+
+	# This delayed procedure will change focused view and call sublime_opacity 
+	# in order to apply on sublime's startup
+	def focus_active_view():
+		winds = sublime.active_window()		
+		if winds:
+			fview = winds.views() 
+			aview = winds.active_view()
+			if fview and aview:
+				# focus to the first view
+				winds.focus_view(fview[0])	
+				# return to the initial active view
+				winds.focus_view(aview)
+		#try again "hack" for ST3
+		sublime_opacity(stt_opacity)
+
+	def persist_settings():
+		sublime.save_settings(stt_settings_filename)
+
+if sys.version_info < (3,):
+	sublime_3 = False
+	plugin_loaded()
