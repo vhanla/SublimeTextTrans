@@ -118,8 +118,10 @@ if sublime.platform()=='windows':
 							ShellExecute(LHDesktop,"open", exe_file,parametro,None,SW_HIDE)
 							if opacity is not None:
 								SetLayeredWindowAttributes(LHWindow,0,opacity, LWA_ALPHA)
-								stt_settings.set("opacity", opacity)
-								persist_settings()
+								cur_opacity = stt_settings.get("opacity", None)
+								if cur_opacity != opacity:
+									stt_settings.set("opacity", opacity)
+									persist_settings()
 							break
 						except ValueError:
 							print("Error! ")
