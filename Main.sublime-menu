@@ -49,20 +49,12 @@
                         "command": "sub_trans_about"
                       },
                       {
-                        "command": "open_file",
-                        "args": {
-                          "file": "${packages}/SublimeTextTrans/README.md",
-                          "platform": "Windows"
-                        },
+                        "command": "transparency_open_help_file",
                         "caption": "Help"
                       },
                       { "caption": "-"},
                       {
-                        "command": "open_file",
-                        "args": {
-                          "file": "${packages}/SublimeTextTrans/SublimeTextTrans.sublime-settings",
-                          "platform": "Windows"
-                        },
+                        "command": "transparency_open_plugin_default_settings_file",
                         "caption": "Settings - Default"
                       },
                       {

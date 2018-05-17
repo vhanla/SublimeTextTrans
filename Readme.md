@@ -11,19 +11,24 @@ This simple plugin for Sublime Text 2 and Sublime Text 3 provides contextual men
 
 Install
 -------
-You may install `SublimeTextTrans` via git with the below commands:
+
+**Using Package Installer:**
+
+    Ctrl+Shift+P - Install Package - Transparency
+
+You may also install `SublimeTextTrans` via git with the below commands:
 
 **Windows only**
 
 **For Sublime Installed:**
 
-    git clone https://github.com/vhanla/SublimeTextTrans.git "%APPDATA%\Sublime Text 2\Packages\SublimeTextTrans"
+    git clone https://github.com/vhanla/SublimeTextTrans.git "%APPDATA%\Sublime Text 2\Packages\Transparency"
 
 **Notice** that this location might change on each SublimeText version, _you can find the correct path by going to menu **Preferences - Browse Packages**_
 
 **For Sublime as Portable:**
 
-    git clone https://github.com/vhanla/SublimeTextTrans.git "C:\Sublime\Data\Packages\SublimeTextTrans""
+    git clone https://github.com/vhanla/SublimeTextTrans.git "C:\Sublime\Data\Packages\Transparency"
 
 *Where* ***C:\Sublime*** *is the portable's path. So change accordingly.*
 
@@ -31,9 +36,6 @@ You can also get it zipped from the [Releases](https://github.com/vhanla/Sublime
 
 Remember, this plugin must be inside its own directory within packages directory where you will unzip it.
 
-**Alternative using Package Installer:**
-
-    Ctrl+Shift+P - Install Package - Transparency
 
 Usage:
 -------
@@ -54,6 +56,13 @@ However, you don't need to install it or launch manually, the plugin does it for
 
 Changelog:
 ----------
+[16-05-2018] v1.4
+
+- Fixed opening default settings and help menu
+- Improved window listing on ST3
+- Fixed issue #3 thanks to @rexdf
+- Only call external executable if ST2/3 window is not already WS_EX_LAYERED
+
 [14-04-2018] v1.3
 
  - Modified `SetSublimeLayered.asm` to make it smaller and to avoid false positives (tested on [VirusTotal](https://www.virustotal.com/#/file/66b72c28f54728c6df3995b0ae026aa1aeeca96911d5b484673a502ec6592f2a/detection))
@@ -103,7 +112,8 @@ You can see other options on `Settings - Default` file.
 
 Author & Contributors
 ----------------------
-[Victor Alberto Gil](http://profiles.google.com/vhanla) - Hope you like my work.
+- [@vhanla](https://github.com/vhanla) - Author.
+- [@rexdf](https://github.com/rexdf) - Contributor
 
 License
 -------
