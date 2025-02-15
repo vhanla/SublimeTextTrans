@@ -22,7 +22,7 @@ You may also install `SublimeTextTrans` via git with the below commands:
 
 Requirements:
 
-- ??**Windows**: compiled SetSublimeLayered.asm to exe which is included already using FlatAssembler, only 1024 bytes binary.
+- 🪟**Windows**: compiled SetSublimeLayered.asm to exe which is included already using FlatAssembler, only 1024 bytes binary.
 
   Why is that? 
 	
@@ -33,7 +33,7 @@ Requirements:
 	**Notice**: Some Anti Malware false positives this really tiny executable, which is weird, so the source code is included in de ./lib directory, if you have issues with that, you can recompile yourself with FlatAssembler, and if your AntiVirusMalware software keeps as False Positive, maybe you should white list it or consider switching to a more reliable AV software.
 
 
-- ??**Linux**: `wmctrl` and `xprop` installed in your system, since they will be called to find the Sublime Text's windows and changing their opacity levels.
+- 🐧**Linux**: `wmctrl` and `xprop` installed in your system, since they will be called to find the Sublime Text's windows and changing their opacity levels.
 
 **For Sublime Installed:**
 
