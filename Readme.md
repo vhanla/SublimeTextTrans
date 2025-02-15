@@ -30,7 +30,7 @@ Requirements:
 	
   And invoking SetWindowLong from Python's embedded by Sublime Text in order to do that change, hangs the Sublime Text's window. SetSublimeLayered is a workaround which receives the Sublime Text's window handle(id) and changes to WS_EX_LAYERED mode.
   
-	**Notice**: Some Anti Malware false positives this really tiny executable, which is weird, so the source code is included in de ./lib directory, if you have issues with that, you can recompile yourself with FlatAssembler, and if your AntiVirusMalware software keeps as False Positive, maybe you should white list it or consider switching to a more reliable AV software.
+	**Notice**: Some Anti Malware false positives this really tiny executable, which is weird, so the source code is included in its ./lib directory, if you have issues with that, you can recompile yourself with FlatAssembler, and if your AntiVirusMalware software keeps as False Positive, maybe you should white list it or consider switching to a more reliable AV software.
 
 
 - 🐧**Linux**: `wmctrl` and `xprop` installed in your system, since they will be called to find the Sublime Text's windows and changing their opacity levels.
@@ -93,7 +93,7 @@ Changelog:
     - MD5 		E113BDC6FA08BC054F7A89E7B24411BD
     - SHA-1 	376707D5579384B42586D0616BB03BBB993C6050
 
-[15-24-2015] v1.2
+[15-04-2015] v1.2
 
  - Onload transparency (95% working due to ST API limitations)
  - Remember chosen transparency level
