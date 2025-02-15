@@ -3,10 +3,17 @@ SublimeText Transparent
 
 Overview
 --------
-This simple plugin for Sublime Text 2 and Sublime Text 3 provides contextual menues to modify the application's opacity.
+This simple plugin for Sublime Text 2 and Sublime Text 3/4 provides contextual menues to modify the application's opacity.
 
-**This is only for Windows Operating System.**
-
+Requirements:
+- Windows: SetSublimeLayered.exe in lib directory in the package
+  That's required since changing Sublime Text's windows to layered mode from within the extension itself
+  hangs the editor, maybe a Python embedded bug.
+  Notice: The source code of it is in a simple very tiny assembly that compiles with FlatAssembler, but some AV shows as False Positive,
+  which is weird for a really tiny executable (1024 bytes) 😅
+- Linux: It relies on `wmctrl` and `xprop`, the first to get the sublime_text.Sublime_text class instances (Windows), 
+	and the second one, to set the opacity level of the matching Sublime Text's windows.
+- macOS: Unsupported.
 
 Usage:
 -------

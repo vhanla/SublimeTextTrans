@@ -4,9 +4,9 @@ SublimeText Transparent
 
 Overview
 --------
-This simple plugin for Sublime Text 2 and Sublime Text 3 provides contextual menues and hotkeys to modify the application's opacity.
+This simple plugin for Sublime Text 2 and Sublime Text 3 & 4 provides contextual menues and hotkeys to modify the application's opacity.
 
-**This is only for SublimeText under Windows.**
+**This is only for SublimeText under Windows and Linux.**
 
 
 Install
@@ -18,7 +18,22 @@ Install
 
 You may also install `SublimeTextTrans` via git with the below commands:
 
-**Windows only**
+**Windows and Linux only**
+
+Requirements:
+
+- ??**Windows**: compiled SetSublimeLayered.asm to exe which is included already using FlatAssembler, only 1024 bytes binary.
+
+  Why is that? 
+	
+	To change a window's opacity in Windows to a certain alpha opacity level, it needs first to be in LayeredMode which is not by default the Sublime Text's windows.
+	
+  And invoking SetWindowLong from Python's embedded by Sublime Text in order to do that change, hangs the Sublime Text's window. SetSublimeLayered is a workaround which receives the Sublime Text's window handle(id) and changes to WS_EX_LAYERED mode.
+  
+	**Notice**: Some Anti Malware false positives this really tiny executable, which is weird, so the source code is included in de ./lib directory, if you have issues with that, you can recompile yourself with FlatAssembler, and if your AntiVirusMalware software keeps as False Positive, maybe you should white list it or consider switching to a more reliable AV software.
+
+
+- ??**Linux**: `wmctrl` and `xprop` installed in your system, since they will be called to find the Sublime Text's windows and changing their opacity levels.
 
 **For Sublime Installed:**
 
@@ -56,6 +71,10 @@ However, you don't need to install it or launch manually, the plugin does it for
 
 Changelog:
 ----------
+[15-02-2025] v1.5
+- Fixed default levels that on rare situations might not be set.
+- Support for Linux (X11) with wmctrl and xprop installed.
+
 [16-05-2018] v1.4
 
 - Fixed opening default settings and help menu
